@@ -1,7 +1,8 @@
-export const GiffyGram = () => {
+import { Logout, logoutButtonHTML } from './auth/Logout.js'
 
+export const GiffyGram = () => {
     // Show main main UI
-    return `<h1>Giffygram</h1>`
+    return `<h1>Giffygram</h1> ${logoutButtonHTML()}`
 }
 
 
