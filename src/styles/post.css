@@ -51,6 +51,7 @@
 .post {
     margin: 0 25%;
     flex-basis: 50%;
+    border: red
 }
 
 .post__image {
