@@ -39,8 +39,10 @@ applicationElement.addEventListener(
             const postTitle = document.getElementById("postTitle").value
             const postURL = document.getElementById("postURL").value
             const postDescription = document.getElementById("postDescription").value
+            const postUserId = localStorage.getItem('gg_user')
 
             const postObj = {
+               userId: postUserId,
                title: postTitle,
                url: postURL,
                description: postDescription,
