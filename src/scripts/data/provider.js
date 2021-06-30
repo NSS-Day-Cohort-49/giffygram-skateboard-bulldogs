@@ -10,7 +10,7 @@ const applicationState = {
         displayFavorites: false,
         displayMessages: false
     },
-    users: [], 
+    users: [],
     posts: [],
     likes: [],
     messages: []
@@ -29,7 +29,6 @@ export const fetchUsers = () => {
         }
     )
 }
-
 export const getUsers = () => {
     return applicationState.users.map(user => ({...user}))
 }
@@ -51,6 +50,18 @@ export const addNewPost = (postObj) => {
         .then(()=> {
             applicationElement.dispatchEvent(new CustomEvent ("stateChanged"))
         })
+}
 
-
+export const fetchPosts = () => {
+    return fetch(`${apiURL}/posts`)
+        .then(response => response.json())
+        .then( 
+            (posts) => {
+                applicationState.posts = posts
+                console.log("posts", posts)
+            }
+        )
+}
+export const getPosts = () => {
+    return applicationState.posts.map(post => ({...post}))
 }

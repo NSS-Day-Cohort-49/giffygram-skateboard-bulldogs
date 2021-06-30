@@ -1,5 +1,6 @@
 import { logoutButtonHTML } from './auth/Logout.js'
 import { addPostForm } from './feed/AddPost.js'
+import { Posts } from './feed/PostList.js'
 
 
 export const GiffyGram = () => {
@@ -9,8 +10,7 @@ export const GiffyGram = () => {
         ${logoutButtonHTML()} 
         <br><br>
         ${addPostForm()}
+        ${Posts()} 
     `
     return html
 }
-
-
