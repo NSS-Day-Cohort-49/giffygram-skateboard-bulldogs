@@ -11,7 +11,7 @@ export const logoutButtonHTML = () => {
 
 const applicationElement = document.querySelector(".giffygram")
 
-applicationElement.addEventListener("click", () => {
+applicationElement.addEventListener("click", (event) => {
    if(event.target.id === "logoutButton")
    Logout()
 }

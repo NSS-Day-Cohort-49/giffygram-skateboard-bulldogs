@@ -1,14 +1,16 @@
-import { Logout, logoutButtonHTML } from './auth/Logout.js'
+import { logoutButtonHTML } from './auth/Logout.js'
+import { addPostForm } from './feed/AddPost.js'
 import { Posts } from './feed/PostList.js'
+
 
 export const GiffyGram = () => {
     // Show main main UI
-    return `<h1>Giffygram</h1> ${logoutButtonHTML()}
-    
-    <div class="giffygram__feed">
-    ${Posts()} 
-    </div>
+    let html =  `
+        <h1>Giffygram</h1> 
+        ${logoutButtonHTML()} 
+        <br><br>
+        ${addPostForm()}
+        ${Posts()} 
     `
+    return html
 }
-
-

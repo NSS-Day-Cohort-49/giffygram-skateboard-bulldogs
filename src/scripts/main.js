@@ -21,4 +21,5 @@ export const renderApp = () => {
 
 
 fetchUsers()
-.then( () => fetchPosts()).then( () => renderApp())
+.then( () => fetchPosts())
+.then( () => renderApp())
