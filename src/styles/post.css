@@ -5,10 +5,12 @@
     border-radius: 0.5rem;
     text-align: center;
     cursor: pointer;
+    display: block;
 }
 
 .newPost {
     margin: 0 25%;
+    display: none;
 }
 
 .newPost__input {
@@ -51,6 +53,7 @@
 .post {
     margin: 0 25%;
     flex-basis: 50%;
+    border: red
 }
 
 .post__image {
