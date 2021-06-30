@@ -5,7 +5,9 @@ import { fetchPosts, fetchUsers } from "./data/provider.js"
 const applicationElement = document.querySelector(".giffygram")
 
 applicationElement.addEventListener("stateChanged", () => {
-   return renderApp()
+    return fetchUsers()
+    .then( () => fetchPosts())
+    .then( () => renderApp())
 })
 
 export const renderApp = () => {
