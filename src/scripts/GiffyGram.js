@@ -1,8 +1,12 @@
-import { Logout, logoutButtonHTML } from './auth/Logout.js'
+import { Navigation } from './nav/Navigation.js'
+
 
 export const GiffyGram = () => {
     // Show main main UI
-    return `<h1>Giffygram</h1> ${logoutButtonHTML()}`
+    return `
+    
+    <section class="navigation">
+    ${Navigation()}
+    </section>`
 }
-
 
