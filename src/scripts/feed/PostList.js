@@ -1,27 +1,25 @@
-import { deletePosts, getPosts, getUsers,  } from "../data/provider.js"
+import { deletePosts, getPosts, getUsers } from "../data/provider.js";
 
-const applicationElement = document.querySelector(".giffygram")
-const currentUser = parseInt(localStorage.getItem("gg_user"))
+const applicationElement = document.querySelector(".giffygram");
+const currentUser = parseInt(localStorage.getItem("gg_user"));
 
-document.addEventListener("click", click => {
-    if (click.target.id.startsWith("post--")) {
-        const [,postId] = click.target.id.split("--")
-        deletePosts(parseInt(postId))
-    }
-})
+document.addEventListener("click", (click) => {
+  if (click.target.id.startsWith("post--")) {
+    const [, postId] = click.target.id.split("--");
+    deletePosts(parseInt(postId));
+  }
+});
 
 export const Posts = () => {
-    const posts = getPosts()
-    const users = getUsers()
-    
-    let foundUser = ""
+  const posts = getPosts();
+  const users = getUsers();
 
-    let postHTML = `${posts.map(
-        (post) => {
-            foundUser = users.find(
-                (user) => user.id === post.userId
-                )
-                return `
+  let foundUser = "";
+
+  let postHTML = `${posts
+    .map((post) => {
+      foundUser = users.find((user) => user.id === post.userId);
+      return `
             <section class="post">
                 <header>
                     <h2 class="post__title">${post.title}</h2>
@@ -40,13 +38,16 @@ export const Posts = () => {
             <div class="post__actions">
                 <div>
                     <img id="favoritePost--4" class="actionIcon" src="/images/favorite-star-blank.svg">   
-                    ${currentUser !== post.userId ? `<br>` : `<button id="post--${post.id}" class="actionIcon">Delete</button>`}
+                    ${
+                      currentUser !== post.userId
+                        ? `<br>`
+                        : `<button id="post--${post.id}" class="actionIcon">Delete</button>`
+                    }
                 </div>
             </div>
             </section>
-            `
-            }
-        ).join("")}`
-    return postHTML
-}
-
+            `;
+    })
+    .join("")}`;
+  return postHTML;
+};
