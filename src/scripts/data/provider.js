@@ -33,9 +33,24 @@ export const getUsers = () => {
     return applicationState.users.map(user => ({...user}))
 }
 
-
+export const fetchPosts = () => {
+    return fetch(`${apiURL}/posts`)
+    .then(response => response.json())
+    .then( 
+        (posts) => {
+            applicationState.posts = posts
+            console.log("posts", posts)
+        }
+        )
+    }
+    
+export const getPosts = () => {
+        return applicationState.posts.map(post => ({...post}))
+    }
+    
+    
 //send new gif data to api and rerender app
-
+    
 export const addNewPost = (postObj) => {
     const fetchOptions = {
         method: "POST",
@@ -44,24 +59,11 @@ export const addNewPost = (postObj) => {
         },
         body: JSON.stringify(postObj)
     }
-
+    
     return fetch(`${apiURL}/posts`, fetchOptions)
         .then(response => response.json())
         .then(()=> {
             applicationElement.dispatchEvent(new CustomEvent ("stateChanged"))
-        })
-}
-
-export const fetchPosts = () => {
-    return fetch(`${apiURL}/posts`)
-        .then(response => response.json())
-        .then( 
-            (posts) => {
-                applicationState.posts = posts
-                console.log("posts", posts)
-            }
-        )
-}
-export const getPosts = () => {
-    return applicationState.posts.map(post => ({...post}))
+        }
+    )
 }
