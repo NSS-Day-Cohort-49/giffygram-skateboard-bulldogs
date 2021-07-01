@@ -51,7 +51,6 @@ export const addNewPost = (postObj) => {
             applicationElement.dispatchEvent(new CustomEvent ("stateChanged"))
         })
 }
-
 export const fetchPosts = () => {
     return fetch(`${apiURL}/posts`)
         .then(response => response.json())
@@ -64,4 +63,15 @@ export const fetchPosts = () => {
 }
 export const getPosts = () => {
     return applicationState.posts.map(post => ({...post}))
+}
+export const deletePosts = (id) => {
+    
+    const applicationState = document.querySelector("#container");
+
+    return fetch(`${apiURL}/posts/${id}`, {method: "DELETE" })
+        .then(
+            () => {
+                document.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
 }
