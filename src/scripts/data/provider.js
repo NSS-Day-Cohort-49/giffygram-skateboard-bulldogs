@@ -67,3 +67,15 @@ export const addNewPost = (postObj) => {
         }
     )
 }
+
+export const deletePosts = (id) => {
+    
+    const applicationElement = document.querySelector("#container");
+
+    return fetch(`${apiURL}/posts/${id}`, {method: "DELETE" })
+        .then(
+            () => {
+                document.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
