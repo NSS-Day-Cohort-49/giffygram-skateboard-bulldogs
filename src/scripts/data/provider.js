@@ -29,11 +29,24 @@ export const fetchUsers = () => {
         }
     )
 }
+
+export const fetchLikes = () => {
+    return fetch(`${apiURL}/likes`)
+        .then(response => response.json())
+        .then(
+            (likesData) => {
+                applicationState.likes = likesData
+            }
+        );
+}
+
 export const getUsers = () => {
     return applicationState.users.map(user => ({...user}))
 }
 
-
+export const getLikes = () => {
+    return applicationState.likes.map(like => ({...like}))
+};
 //send new gif data to api and rerender app
 
 export const addNewPost = (postObj) => {
@@ -64,4 +77,20 @@ export const fetchPosts = () => {
 }
 export const getPosts = () => {
     return applicationState.posts.map(post => ({...post}))
+}
+
+export const addLikes = (likeObj) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(likeObj)
+    }
+
+    return fetch(`${apiURL}/likes`, fetchOptions)
+    .then(response => response.json())
+    .then(() => {
+        applicationElement.dispatchEvent(new CustomEvent ("stateChanged"))
+    })
 }
