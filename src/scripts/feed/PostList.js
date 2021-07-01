@@ -1,6 +1,7 @@
 import { deletePosts, getPosts, getUsers,  } from "../data/provider.js"
 
 const applicationElement = document.querySelector(".giffygram")
+const currentUser = parseInt(localStorage.getItem("gg_user"))
 
 document.addEventListener("click", click => {
     if (click.target.id.startsWith("post--")) {
@@ -39,7 +40,7 @@ export const Posts = () => {
             <div class="post__actions">
                 <div>
                     <img id="favoritePost--4" class="actionIcon" src="/images/favorite-star-blank.svg">   
-                    <button class="actionIcon" id="post--${post.id}">Delete </button>
+                    ${currentUser !== post.userId ? `<br>` : `<button id="post--${post.id}" class="actionIcon">Delete</button>`}
                 </div>
             </div>
             </section>
