@@ -1,6 +1,6 @@
 import { deletePosts, getPosts, getUsers,  } from "../data/provider.js"
 
-const applicationState = document.querySelector("#container");
+const applicationElement = document.querySelector(".giffygram")
 
 document.addEventListener("click", click => {
     if (click.target.id.startsWith("post--")) {
@@ -48,10 +48,4 @@ export const Posts = () => {
         ).join("")}`
     return postHTML
 }
-
-
-// TODO: 
-// 1. get posts from the database
-// 2. build the HTML of a post
-// 3. Call the HTML in Gifftgram.js
 

@@ -66,7 +66,7 @@ export const getPosts = () => {
 }
 export const deletePosts = (id) => {
     
-    const applicationState = document.querySelector("#container");
+    const applicationElement = document.querySelector("#container");
 
     return fetch(`${apiURL}/posts/${id}`, {method: "DELETE" })
         .then(
