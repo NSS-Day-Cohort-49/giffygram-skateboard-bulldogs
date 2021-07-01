@@ -5,6 +5,8 @@ import { getPosts, addLikes } from "../data/provider.js"
 //     
 //     }
 // })
+    
+
 applicationElement.addEventListener(
     "click", (event) => {
                
@@ -15,17 +17,17 @@ applicationElement.addEventListener(
             const likeObj = {
                userId: parseInt(likeUserId),
                postId: parseInt(likePostId)
-                
-                
                
+
             }
+            
             addLikes(likeObj)
             console.log(`New post sent to api: ${likeObj}`)
         }
     }
     )
-
-export const Posts = () => {
+    
+   export const Posts = () => {
     const posts = getPosts()
 
     
@@ -66,6 +68,7 @@ export const Posts = () => {
         </section>
         </li>`
     }).join("")}</ul>`
+    
     return postHTML
 }
     
@@ -73,3 +76,4 @@ export const Posts = () => {
 // 1. get posts from the database
 // 2. build the HTML of a post
 // 3. Call the HTML in Gifftgram.js
+    
