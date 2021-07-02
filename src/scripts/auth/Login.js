@@ -17,7 +17,7 @@ document.addEventListener("click", clickEvent => {
 
         if (foundUser !== null) {
             localStorage.setItem("gg_user", foundUser.id)
-            document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+            document.dispatchEvent(new CustomEvent("stateChanged"))
         }
     }
 })

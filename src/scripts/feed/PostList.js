@@ -1,26 +1,38 @@
 import { deletePosts, getPosts, getUsers } from "../data/provider.js";
 
 const applicationElement = document.querySelector(".giffygram");
-const currentUser = parseInt(localStorage.getItem("gg_user"));
 
-document.addEventListener("click", (click) => {
-  if (click.target.id.startsWith("post--")) {
-    const [, postId] = click.target.id.split("--");
-    deletePosts(parseInt(postId));
-  }
+
+applicationElement.addEventListener("click", (click) => {
+    if (click.target.id.startsWith("post--")) {
+        const [, postId] = click.target.id.split("--");
+        deletePosts(parseInt(postId));
+    }
 });
 
+/*
+document.addEventListener("click", (click) => {
+    if (click.target.id.startsWith("post--")) {
+        const [, postId] = click.target.id.split("--");
+        deletePosts(parseInt(postId));
+    }
+});
+*/
+
 export const Posts = () => {
-  const posts = getPosts();
-  const users = getUsers();
+    const posts = getPosts();
+    const users = getUsers();
+    const currentUser = parseInt(localStorage.getItem("gg_user"));
 
-  let foundUser = "";
+  let foundUser
 
-  let postHTML = `${posts
+  let postHTML = `<div id="postList" class="postList">`
+
+  postHTML += `${posts
     .map((post) => {
-      foundUser = users.find((user) => user.id === post.userId);
+      foundUser = users.find((user) => user.id === post.userId)
       return `
-            <section class="post">
+            <section id="post" class="post">
                 <header>
                     <h2 class="post__title">${post.title}</h2>
                 </header>
@@ -37,17 +49,16 @@ export const Posts = () => {
             </div>
             <div class="post__actions">
                 <div>
-                    <img id="favoritePost--4" class="actionIcon" src="/images/favorite-star-blank.svg">   
-                    ${
-                      currentUser !== post.userId
-                        ? `<br>`
-                        : `<button id="post--${post.id}" class="actionIcon">Delete</button>`
-                    }
+                    <img id="favoritePost--4" class="actionIcon" src="/images/favorite-star-blank.svg">
+                    ${currentUser !==  post.userId ? `<br>` : `<img id="post--${post.id}" class="actionIcon" src="/images/block.svg" alt>`}
                 </div>
             </div>
             </section>
-            `;
+            `
     })
-    .join("")}`;
+    .join("")}`
+
+    postHTML += `</div>`
+
   return postHTML;
 };
