@@ -1,4 +1,4 @@
-import { getMessages } from "../data/provider.js"
+import { getMessages, getUsers } from "../data/provider.js"
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -7,16 +7,19 @@ export const ReceivedMessages = () => {
    
    const currentUser = parseInt(localStorage.getItem("gg_user"))
    const messages = getMessages()
+   const users = getUsers()
    
+   let foundSender
+
    let messageHTML = `<div id="messageList" class="messageList">`
 
    messageHTML += `${messages.map((message) => {
-      
+      foundSender = users.find((user) => user.id === message.senderId)
       if(currentUser === message.recipientId && message.read === false) {
 
          return `
                <div class="message" id="message--${message.id}">
-                  <div class="message__author">From ${message.senderId}</div>
+                  <div class="message__author">From ${foundSender.name}</div>
                   <div class="message__text">${message.text}</div>
                </div>
          `
