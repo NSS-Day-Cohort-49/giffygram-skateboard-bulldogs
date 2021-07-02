@@ -45,7 +45,7 @@ export const Posts = () => {
                         <a href="#" class="profileLink" id="userId">
                         ${foundUser.name}
                         </a>
-                        on ${post.timestamp}
+                        on ${new Date(post.timestamp).toLocaleString()}
                     </div>
                     <div class="post__actions">
                         <div>
