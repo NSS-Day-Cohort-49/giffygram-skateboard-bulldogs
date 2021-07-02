@@ -12,7 +12,7 @@ export const Footer = () => {
    const usersOptions = () => {
       let optionHTML = `${users.map((user) => {
          return `
-         <option value="${user}--${user.id}">${user.name}</option>
+            <option value="${user}--${user.id}">${user.name}</option>
          `
       })}`
       return optionHTML
@@ -27,9 +27,10 @@ export const Footer = () => {
                 <span id="postCount">${posts.length}</span>
             </div>
             <div class="footer__item">
-                Posts by user <select id="userSelection">
-                    ${usersOptions()}
-                </select>
+               Posts by user <select id="userSelection">
+                  <option>Select a user!</option>
+                  ${usersOptions()}
+               </select>
             </div>
             <div class="footer__item">
             Show only favorites <input id="showOnlyFavorites" type="checkbox">

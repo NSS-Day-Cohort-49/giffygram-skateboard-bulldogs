@@ -20,8 +20,10 @@ document.addEventListener("click", (click) => {
 */
 
 export const Posts = () => {
-    const posts = getPosts();
-    const users = getUsers();
+    const posts = getPosts().sort((a, b) => {
+    return b.id - a.id;
+});
+    const users = getUsers()
     const currentUser = parseInt(localStorage.getItem("gg_user"));
 
     let foundUser
