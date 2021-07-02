@@ -12,7 +12,7 @@ export const Footer = () => {
    const usersOptions = () => {
       let optionHTML = `${users.map((user) => {
          return `
-            <option value="${user}--${user.id}">${user.name}</option>
+            <option id="userOption" value="${user}--${user.id}">${user.name}</option>
          `
       })}`
       return optionHTML

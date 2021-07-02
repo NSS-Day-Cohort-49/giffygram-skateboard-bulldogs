@@ -11,6 +11,24 @@ applicationElement.addEventListener("click", (click) => {
 });
 
 /*
+applicationElement.addEventListener("change", (event) => {
+    if (event.target.id === "userOption") {
+        let [, userId] = event.target.value.split("--")
+        userId = parseInt(userId)
+        let usersPosts = document.getElementsByClassName("post").map((post) => post.
+        let shownPosts = usersPosts.map((post) => {userId === post.id
+            )
+
+   }
+})
+
+const hidePosts = () => {
+   document.getElementById.(`userPost--${foundUser.id}`).style.display = "none"
+}
+
+
+
+/*
 document.addEventListener("click", (click) => {
     if (click.target.id.startsWith("post--")) {
         const [, postId] = click.target.id.split("--");
@@ -21,11 +39,11 @@ document.addEventListener("click", (click) => {
 
 export const Posts = () => {
     const posts = getPosts().sort((a, b) => {
-    return b.id - a.id;
-});
+        return b.id - a.id;
+    });
+    
     const users = getUsers()
     const currentUser = parseInt(localStorage.getItem("gg_user"));
-
     let foundUser
 
     let postHTML = `<div id="postList" class="postList">`
@@ -34,7 +52,7 @@ export const Posts = () => {
         .map((post) => {
         foundUser = users.find((user) => user.id === post.userId)
             return `
-                <section id="post" class="post">
+                <section id="userPost--${foundUser.id}" class="post">
                     <header>
                         <h2 class="post__title">${post.title}</h2>
                     </header>
