@@ -106,9 +106,9 @@ export const addLikes = (likeObj) => {
 
     return fetch(`${apiURL}/likes`, fetchOptions)
     .then(response => response.json())
-    .then(() => {
-        applicationElement.dispatchEvent(new CustomEvent ("stateChanged"))
-    })
+    // .then(() => {
+    //     document.dispatchEvent(new CustomEvent ("stateChanged"))
+    // })
 }
 export const deletePosts = (id) => {
 
@@ -118,4 +118,13 @@ export const deletePosts = (id) => {
                 document.dispatchEvent(new CustomEvent("stateChanged"))
             }
         )
+}
+export const deleteLikes = (id) => {
+
+    return fetch(`${apiURL}/likes/postId/${id}`, {method: "DELETE" })
+        // .then(
+        //     () => {
+        //         // document.dispatchEvent(new CustomEvent("stateChanged"))
+        //     }
+        // )
 }

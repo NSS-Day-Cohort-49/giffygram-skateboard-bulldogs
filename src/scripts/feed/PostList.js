@@ -1,33 +1,38 @@
-import { deletePosts, getPosts, getUsers, addLikes } from "../data/provider.js";
+import { deletePosts, getPosts, getUsers, addLikes, deleteLikes, getLikes } from "../data/provider.js";
 
 const currentUser = parseInt(localStorage.getItem("gg_user"));
  const applicationElement = document.querySelector(".giffygram")
-// applicationElement.addEventListener("click", click => {
-//     
-//     }
-// })
-    
+ const likes = getLikes() 
 
 applicationElement.addEventListener(
     "click", (event) => {
                
-        if (event.target.id.startsWith("likePost")) {
+        if (event.target.id.startsWith("favoritePost")) {
             const [,likePostId] = event.target.id.split("--")
             const likeUserId = localStorage.getItem('gg_user')
 
             const likeObj = {
                userId: parseInt(likeUserId),
                postId: parseInt(likePostId)
-               
-
             }
-            
-            addLikes(likeObj)
+            if (document.getElementById(`favoritePost--${likePostId}`).src.endsWith("star-blank.svg")){
+                //It's currently blank, let's set it as a favorite
+                document.getElementById(`favoritePost--${likePostId}`).src="/images/favorite-star-yellow.svg"
+                addLikes(likeObj) 
+            }
+              else{
+                document.getElementById(`favoritePost--${likePostId}`).src="/images/favorite-star-blank.svg"
+                deleteLikes(parseInt(likePostId))
+              }
+                        
             console.log(`New post sent to api: ${likeObj}`)
         }
     }
-    )
-    
+)
+
+const changeStar = () => {
+    document.getElementById("favoritePost")
+}
 
 applicationElement.addEventListener("click", (click) => {
     if (click.target.id.startsWith("post--")) {
@@ -35,6 +40,8 @@ applicationElement.addEventListener("click", (click) => {
         deletePosts(parseInt(postId));
     }
 });
+
+
 
 /*
 applicationElement.addEventListener("change", (event) => {
@@ -95,7 +102,7 @@ export const Posts = () => {
                     </div>
                     <div class="post__actions">
                         <div>
-                            <img id="favoritePost--4" class="actionIcon" src="/images/favorite-star-blank.svg">
+                            <img id="favoritePost--${post.id}" class="actionIcon" src="/images/favorite-star-blank.svg">
                             ${currentUser !==  post.userId ? `<br>` : `<img id="post--${post.id}" class="actionIcon" src="/images/block.svg" alt>`}
                         </div>
                     </div>
@@ -108,3 +115,6 @@ export const Posts = () => {
 
   return postHTML;
 };
+
+
+
