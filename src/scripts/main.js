@@ -11,6 +11,12 @@ applicationElement.addEventListener("stateChanged", () => {
     .then( () => renderApp())
 })
 
+document.addEventListener("stateChanged", () => {
+    return fetchUsers()
+    .then( () => fetchPosts())
+    .then( () => renderApp() )
+})
+
 export const renderApp = () => {
     const user = parseInt(localStorage.getItem("gg_user"))
 

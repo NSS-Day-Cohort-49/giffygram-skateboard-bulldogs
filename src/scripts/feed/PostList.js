@@ -1,5 +1,6 @@
-import { getPosts, addLikes } from "../data/provider.js"
+import { deletePosts, getPosts, getUsers, addLikes } from "../data/provider.js";
 
+const currentUser = parseInt(localStorage.getItem("gg_user"));
  const applicationElement = document.querySelector(".giffygram")
 // applicationElement.addEventListener("click", click => {
 //     
@@ -27,53 +28,53 @@ applicationElement.addEventListener(
     }
     )
     
-   export const Posts = () => {
-    const posts = getPosts()
 
-    
-    let postHTML = `
-    <ul> ${posts.map(
-        (post) => { 
-     return`
 
-    <li>
-        <section class="post">
-            <header>
-                <h2 id= "postId" class="post__title">${post.title}</h2>
+document.addEventListener("click", (click) => {
+  if (click.target.id.startsWith("post--")) {
+    const [, postId] = click.target.id.split("--");
+    deletePosts(parseInt(postId));
+  }
+});
+
+export const Posts = () => {
+  const posts = getPosts();
+  const users = getUsers();
+
+  let foundUser = "";
+
+  let postHTML = `${posts
+    .map((post) => {
+      foundUser = users.find((user) => user.id === post.userId);
+      return `
+            <section class="post">
+                <header>
+                    <h2 class="post__title">${post.title}</h2>
                 </header>
-                <img id= "postURL" class="post__image" src="${post.url}">
+            <img class="post__image" src="${post.url}">
             <div class="post__description">
                 ${post.description}
             </div>
             <div class="post__tagline">
                 Posted by
                 <a href="#" class="profileLink" id="userId">
-                ${post.userId}
+                ${foundUser.name}
                 </a>
                 on ${post.timestamp}
             </div>
             <div class="post__actions">
-            <div>
-            <img id="likePost--${post.id}" class="actionIcon" src="/images/favorite-star-blank.svg">
+                <div>
+                    <img id="favoritePost--${post.id}" class="actionIcon" src="/images/favorite-star-blank.svg">   
+                    ${
+                      currentUser !== post.userId
+                        ? `<br>`
+                        : `<button id="post--${post.id}" class="actionIcon">Delete</button>`
+                    }
+                </div>
             </div>
-            <div class="post__actions">
-            
-            <div>
-                <img id="blockPost--8" class="actionIcon" src="/images/block.svg">
-
-            </div>
-        </div>   
-            </div>
-            </div>
-        </section>
-        </li>`
-    }).join("")}</ul>`
-    
-    return postHTML
-}
-    
-// TODO: 
-// 1. get posts from the database
-// 2. build the HTML of a post
-// 3. Call the HTML in Gifftgram.js
-    
+            </section>
+            `;
+    })
+    .join("")}`;
+  return postHTML;
+};
