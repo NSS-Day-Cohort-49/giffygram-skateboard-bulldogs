@@ -50,6 +50,9 @@
     font-size: 6rem;
 }
 
+.postList {
+    display: block;
+}
 .post {
     margin: 0 25%;
     flex-basis: 50%;

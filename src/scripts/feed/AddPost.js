@@ -61,7 +61,9 @@ applicationElement.addEventListener(
 
 export const addPostForm = () => {
 
-   let addPostHTML = `
+   let addPostHTML = `<div id="addPost">`
+
+   addPostHTML += `
       <div class="miniMode" id="miniMode">
          Have a gif to post?
       </div>
@@ -80,5 +82,8 @@ export const addPostForm = () => {
          <button id="newPost__cancel">Cancel</button>
       </div>
    `
+
+   addPostHTML += `</div>`
+
    return addPostHTML
 }
